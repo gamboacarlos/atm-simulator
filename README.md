@@ -1,1 +1,1 @@
-ATM simulator Java program.
+ATM simulator Java command line program.

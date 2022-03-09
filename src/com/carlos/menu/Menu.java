@@ -1,4 +1,7 @@
-package com.carlos;
+package com.carlos.menu;
+
+import com.carlos.account.Account;
+import com.carlos.operations.Operations;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -6,10 +9,12 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
-public class Menu extends Account {
+public class Menu {
     Scanner menuInput = new Scanner(System.in);
     DecimalFormat moneyFormat = new DecimalFormat("'$'###,##0.00");
     HashMap<Integer, Integer> data = new HashMap<Integer, Integer>();
+    Account userAccount = new Account();
+    Operations transaction = new Operations(userAccount.getCustomerNumber(), userAccount.getPinNumber());
 
     // Display menu login
     public void getLogin() throws IOException {
@@ -17,25 +22,26 @@ public class Menu extends Account {
         do {
             try {
                 data.put(123456, 123);
-                data.put(654321, 321);
                 System.out.println("Welcome the ATM project");
                 System.out.println("Enter your customer number");
-                setCustomerNumber(menuInput.nextInt());
+                userAccount.setCustomerNumber(menuInput.nextInt());
                 System.out.println("Enter your pin number");
-                setPinNumber(menuInput.nextInt());
+                userAccount.setPinNumber(menuInput.nextInt());
             } catch (Exception e) {
                 System.out.println("Invalid character, enter only Numbers" + "\n");
                 x = 2;
             }
-            for(Entry<Integer, Integer> entry:data.entrySet()) {
-                if(entry.getKey() == getCustomerNumber() && entry.getValue() == getPinNumber()){
+            for (Entry<Integer, Integer> entry : data.entrySet()) {
+                if (entry.getKey() == userAccount.getCustomerNumber() && entry.getValue() == userAccount.getPinNumber()) {
                     getAccountType();
                 }
             }
-            System.out.println("Wrong customer number or id"+"\n");
-        }while(x==1);
+            System.out.println("Wrong customer number or id" + "\n");
+        } while (x == 1);
     }
+
     int selection;
+
     // Display account type menu
     public void getAccountType() {
         System.out.println("Select the account you want to acces");
@@ -44,7 +50,7 @@ public class Menu extends Account {
         System.out.println("Type 3: Exit");
         System.out.println("Choice :");
         selection = menuInput.nextInt();
-        switch(selection){
+        switch (selection) {
             case 1:
                 getChecking();
                 break;
@@ -52,10 +58,11 @@ public class Menu extends Account {
                 getSaving();
                 break;
             case 3:
-                System.out.println("Thank you for using this ATM, Bye");;
+                System.out.println("Thank you for using this ATM, Bye");
+                ;
                 break;
             default:
-                System.out.println("Invalid choice"+"\n");
+                System.out.println("Invalid choice" + "\n");
                 getAccountType();
         }
 
@@ -68,23 +75,23 @@ public class Menu extends Account {
         System.out.println("Type 2: Withdraw funds");
         System.out.println("Type 3: Deposit founds");
         System.out.println("Type 4: Exit");
-        System.out.println("Choice :"+"\n");
+        System.out.println("Choice :" + "\n");
         selection = menuInput.nextInt();
-        switch(selection){
+        switch (selection) {
             case 1:
-                System.out.println("Checking account balance" + moneyFormat.format(getCheckingBalance()));
+                System.out.println("Checking account balance" + moneyFormat.format(userAccount.getCheckingBalance()));
                 getAccountType();
                 break;
             case 2:
-                getCheckingWithdrawalInput();
+                transaction.getCheckingWithdrawalInput();
                 getAccountType();
                 break;
             case 3:
-                getCheckingDepositInput();
+                transaction.getCheckingDepositInput();
                 getAccountType();
                 break;
             default:
-                System.out.println("\n"+"Invalid choice"+"\n");
+                System.out.println("\n" + "Invalid choice" + "\n");
                 getChecking();
         }
     }
@@ -96,23 +103,23 @@ public class Menu extends Account {
         System.out.println("Type 2: Withdraw funds");
         System.out.println("Type 3: Deposit founds");
         System.out.println("Type 4: Exit");
-        System.out.println("Choice :"+"\n");
+        System.out.println("Choice :" + "\n");
         selection = menuInput.nextInt();
-        switch(selection){
+        switch (selection) {
             case 1:
-                System.out.println("Saving account balance" + moneyFormat.format(getSavingBalance()));
+                System.out.println("Saving account balance" + moneyFormat.format(userAccount.getSavingBalance()));
                 getAccountType();
                 break;
             case 2:
-                getSavingWithdrawalInput();
+                transaction.getSavingWithdrawalInput();
                 getAccountType();
                 break;
             case 3:
-                getSavingDepositInput();
+                transaction.getSavingDepositInput();
                 getAccountType();
                 break;
             default:
-                System.out.println("\n"+"Invalid choice"+"\n");
+                System.out.println("\n" + "Invalid choice" + "\n");
                 getSaving();
         }
     }

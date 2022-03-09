@@ -1,46 +1,20 @@
-package com.carlos;
+package com.carlos.operations;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-public class Account {
+public class Operations {
     Scanner input = new Scanner(System.in);
     DecimalFormat moneyFormat = new DecimalFormat("'$'###,##0.00");
-    private int customerNumber;
-    private int pinNumber;
+    int customerNumber;
+    int pinNumber;
     private double checkingBalance;
     private double savingBalance;
 
-    // Set the customer number
-    public int setCustomerNumber(int customerNumber) {
+    public Operations(int customerNumber,
+                           int pinNumber) {
         this.customerNumber = customerNumber;
-        return customerNumber;
-    }
-
-    // Set the customer number
-    public int setPinNumber(int pinNumber) {
         this.pinNumber = pinNumber;
-        return pinNumber;
-    }
-
-    // Get customer number
-    public int getCustomerNumber() {
-        return customerNumber;
-    }
-
-    // Get pin number
-    public int getPinNumber() {
-        return pinNumber;
-    }
-
-    // Get checking balance
-    public double getCheckingBalance() {
-        return checkingBalance;
-    }
-
-    // Get saving balance
-    public double getSavingBalance() {
-        return savingBalance;
     }
 
     // Calculate checking account withdraw
@@ -75,8 +49,8 @@ public class Account {
         if ((checkingBalance - amount) >= 0) {
             calcCheckingWithdrawal(amount);
             System.out.println("New checking account balance" + moneyFormat.format(checkingBalance));
-        }else {
-            System.out.println("Insufficient balance"+"\n");
+        } else {
+            System.out.println("Insufficient balance" + "\n");
 
         }
     }
@@ -89,8 +63,8 @@ public class Account {
         if ((savingBalance - amount) >= 0) {
             calcSavingWithdrawal(amount);
             System.out.println("New saving account balance" + moneyFormat.format(savingBalance));
-        }else {
-            System.out.println("Insufficient balance"+"\n");
+        } else {
+            System.out.println("Insufficient balance" + "\n");
 
         }
     }
@@ -103,8 +77,8 @@ public class Account {
         if ((checkingBalance - amount) >= 0) {
             calcCheckingWithdrawal(amount);
             System.out.println("New checking account balance" + moneyFormat.format(checkingBalance));
-        }else {
-            System.out.println("Insufficient balance"+"\n");
+        } else {
+            System.out.println("Insufficient balance" + "\n");
 
         }
     }
@@ -117,10 +91,9 @@ public class Account {
         if ((savingBalance - amount) >= 0) {
             calcSavingWithdrawal(amount);
             System.out.println("New saving account balance" + moneyFormat.format(savingBalance));
-        }else {
-            System.out.println("Insufficient balance"+"\n");
+        } else {
+            System.out.println("Insufficient balance" + "\n");
         }
     }
-
 
 }
